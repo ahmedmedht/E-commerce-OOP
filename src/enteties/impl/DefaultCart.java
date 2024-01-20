@@ -8,7 +8,7 @@ import services.impl.DefaultProductManagementService;
 import java.util.Arrays;
 
 public class DefaultCart implements Cart {
-    private static Product[] products;
+    private  Product[] products;
     private static final int DEFAULT_Product_CAPACITY = 10;
     private static int lastIndex;
 
@@ -24,6 +24,10 @@ public class DefaultCart implements Cart {
 
     @Override
     public void addProduct(Product productById) {
+        if (products== null) {
+            products = new Product[DEFAULT_Product_CAPACITY];
+            lastIndex=0;
+        }
         if (products.length <=lastIndex){
             products= Arrays.copyOf(products,products.length*2);
         }

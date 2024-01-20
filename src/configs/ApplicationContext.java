@@ -3,6 +3,7 @@ package configs;
 import enteties.Cart;
 import enteties.User;
 import enteties.impl.DefaultCart;
+import enteties.impl.DefaultUser;
 import menu.Menu;
 
 public class ApplicationContext {

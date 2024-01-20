@@ -45,7 +45,7 @@ public class ProductCatalogMenu implements Menu {
         String userInput=sc.nextLine();
         Menu menu;
         Cart cart=context.getSessionCart();
-        if (userInput.charAt(0)>='0' && userInput.charAt(0)<='9'){
+        if (userInput.charAt(0)>='0' && userInput.charAt(0)<='9' &&userInput.length()<9999){
             Product product=productManagementService.getProductById(Integer.parseInt(userInput));
 
             if (product==null){

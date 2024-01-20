@@ -16,6 +16,8 @@ public class DefaultUserManagementService implements UserManagementService {
     private static User[] users;
     private static int lastIndex;
 
+    public static int id = 1;
+
     private static DefaultUserManagementService instance;
 
     // <write your code here>
@@ -23,6 +25,24 @@ public class DefaultUserManagementService implements UserManagementService {
         users=new DefaultUser[DEFAULT_USERS_CAPACITY];
     }
     private DefaultUserManagementService() {
+    }
+    @Override
+    public User changeSetting(User user,String pass,boolean check){
+        for (int i=0;i<users.length;i++){
+            if (user.getId()==users[i].getId()){
+                if (check)
+                    users[i].setPassword(pass);
+                else
+                    users[i].setEmail(pass);
+                return users[i];
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Integer getNewId() {
+        return id++;
     }
 
     @Override

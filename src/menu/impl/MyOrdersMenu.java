@@ -39,6 +39,8 @@ public class MyOrdersMenu implements Menu {
     private void printUserOrder( Order[] orders) {
 
             for (Order ord:orders){
+                if (ord==null)
+                    break;
                 System.out.println(ord.toString());
             }
     }

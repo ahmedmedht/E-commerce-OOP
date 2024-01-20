@@ -33,18 +33,25 @@ public class MainMenu implements Menu {
     public void start() {
         Scanner sc =new Scanner(System.in);
         checkLoggedIn=checkLoggedIn();
+        Menu menu;
         if (checkLoggedIn) {
             System.out.print(MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
             String userInput=sc.nextLine();
-            checkUserSelectIn(userInput);
+            if (userInput.equals("exit"))
+                System.exit(0);
+            menu=checkUserSelectIn(userInput);
+
         }
         else {
             System.out.print(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
             String userInput=sc.nextLine();
             if (userInput.equals("exit"))
                 System.exit(0);
-            checkUserSelectOut(userInput);
+            menu=checkUserSelectOut(userInput);
         }
+        if (checkLoggedIn())
+            System.out.println(context.getLoggedInUser().toString());
+        menu.start();
 
 
     }
@@ -53,7 +60,7 @@ public class MainMenu implements Menu {
         return context.getLoggedInUser() != null;
     }
 
-    private void checkUserSelectOut(String userInput) {
+    private Menu checkUserSelectOut(String userInput) {
         Menu menu ;
         switch (userInput){
             case "1":
@@ -80,10 +87,10 @@ public class MainMenu implements Menu {
                 break;
 
         }
-        menu.start();
+        return menu;
     }
 
-    private void checkUserSelectIn(String userInput) {
+    private Menu checkUserSelectIn(String userInput) {
         Menu menu ;
         switch (userInput){
             case "1":
@@ -110,7 +117,7 @@ public class MainMenu implements Menu {
                 break;
 
         }
-        menu.start();
+        return menu;
     }
 
     @Override

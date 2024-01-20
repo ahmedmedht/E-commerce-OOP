@@ -51,7 +51,8 @@ public class CheckOutMenu implements Menu {
             order.setProducts(cart.getProducts());
             order.setCustomerId(context.getLoggedInUser().getId());
             System.out.println(orderManagementService.addOrder(order));
-            context.setSessionCart(null);
+            cart.clear();
+            context.setSessionCart(cart);
             menu=new MainMenu();
 
         }else{

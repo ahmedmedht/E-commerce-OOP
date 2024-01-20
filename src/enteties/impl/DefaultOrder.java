@@ -63,5 +63,6 @@ public class DefaultOrder implements Order {
                 " customer id - " + customerId +
                 "  credit card number - " + creditCardNumber +
                 " products - " + Arrays.toString(products) ;
+
     }
 }

@@ -7,15 +7,13 @@ public class DefaultUser implements User {
     private String lastName;
     private String password;
     private String email;
-    private static int id;
-    {
-        id+=1;
-    }
+    private int id;
 
     public DefaultUser() {
     }
 
-    public DefaultUser(String firstName, String lastName, String password, String email) {
+    public DefaultUser(int id,String firstName, String lastName, String password, String email) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -47,7 +45,8 @@ public class DefaultUser implements User {
         return "Customer: " +
                 "firstName= " + firstName +
                 " lastName= " + lastName +
-                " email= " + email;
+                " email= " + email
+                +" id= "+id;
     }
 
 

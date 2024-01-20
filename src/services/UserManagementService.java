@@ -8,4 +8,7 @@ public interface UserManagementService {
     User[] getUsers();
 
     User getUserByEmail(String userEmail);
+    User changeSetting(User user,String pass,boolean check);
+
+    Integer getNewId();
 }

@@ -14,8 +14,7 @@ import java.util.regex.Pattern;
 public class SignUpMenu implements Menu {
     private UserManagementService userManagementService;
     private ApplicationContext context;
-    Scanner sc=new Scanner(System.in);
-
+    Scanner sc = new Scanner(System.in);
 
 
     {
@@ -26,24 +25,22 @@ public class SignUpMenu implements Menu {
 
     @Override
     public void start() {
-        User user=enterDataUser();
+        User user = enterDataUser();
         Menu menu;
-        if (checkUserEnterEmail(user)){
+        if (checkUserEnterEmail(user)) {
             System.out.println(DefaultUserManagementService.getEmptyEmailErrorMessage());
-            menu=new SignUpMenu();
-        }else if (userManagementService.getUserByEmail(user.getEmail())!=null){
+            menu = new SignUpMenu();
+        } else if (userManagementService.getUserByEmail(user.getEmail()) != null) {
             System.out.println(DefaultUserManagementService.getNotUniqueEmailErrorMessage());
-            menu=new SignUpMenu();
-        }
-        else {
+            menu = new SignUpMenu();
+        } else {
             context.setLoggedInUser(user);
             System.out.println(userManagementService.registerUser(user));
-            menu=new MainMenu();
+            menu = new MainMenu();
         }
         menu.start();
 
     }
-
 
 
     private boolean checkUserEnterEmail(User user) {
@@ -57,14 +54,14 @@ public class SignUpMenu implements Menu {
 
     private User enterDataUser() {
         System.out.print("Please, enter your first name: ");
-        String firstName=sc.nextLine();
+        String firstName = sc.nextLine();
         System.out.print("Please, enter your last name: ");
-        String lastName=sc.nextLine();
+        String lastName = sc.nextLine();
         System.out.print("Please, enter your password: ");
-        String password=sc.nextLine();
+        String password = sc.nextLine();
         System.out.print("Please, enter your email: ");
-        String email=sc.nextLine();
-        return new DefaultUser(firstName,lastName,password,email);
+        String email = sc.nextLine();
+        return new DefaultUser(userManagementService.getNewId(), firstName, lastName, password, email);
     }
 
 
