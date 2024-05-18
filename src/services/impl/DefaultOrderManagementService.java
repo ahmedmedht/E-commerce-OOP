@@ -4,15 +4,16 @@ import enteties.Cart;
 import enteties.Order;
 import services.OrderManagementService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DefaultOrderManagementService implements OrderManagementService {
     private static final int DEFAULT_ORDER_CAPACITY = 10;
-    private static Order[] orders;
+    private static ArrayList<Order> orders;
     private static int lastIndex;
     private static DefaultOrderManagementService instance;
     {
-        orders=new Order[DEFAULT_ORDER_CAPACITY];
+        orders=new ArrayList<>();
     }
     // <write your code here>
 
@@ -27,34 +28,25 @@ public class DefaultOrderManagementService implements OrderManagementService {
     public String addOrder(Order order) {
         if (order==null)
             return null;
-        if (orders.length <=lastIndex){
-            orders= Arrays.copyOf(orders,orders.length*2);
-        }
-        orders[lastIndex++]=order;
+        orders.add(order);
         return "Thanks a lot for your purchase. Details about order delivery are sent to your email.";
     }
 
     @Override
-    public Order[] getOrdersByUserId(int userId) {
-        Order[] orderUser=new Order[orders.length];
-        int index=0;
-        boolean checkOrder=false;
-
+    public ArrayList<Order> getOrdersByUserId(int userId) {
+        ArrayList<Order> orderUser=new ArrayList<>();
         for (Order order:orders) {
             if (order!=null) {
                 if (order.getCustomerId() == userId) {
-                    orderUser[index++] = order;
-                    checkOrder = true;
+                    orderUser.add(order);
                 }
             }
         }
-        if (checkOrder)
         return orderUser;
-        else return null;
     }
 
     @Override
-    public Order[] getOrders() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 

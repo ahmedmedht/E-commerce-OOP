@@ -2,11 +2,13 @@ package services;
 
 import enteties.Order;
 
+import java.util.ArrayList;
+
 public interface OrderManagementService {
 
     String addOrder(Order order);
 
-    Order[] getOrdersByUserId(int userId);
+    ArrayList<Order> getOrdersByUserId(int userId);
 
-    Order[] getOrders();
+    ArrayList<Order> getOrders();
 }

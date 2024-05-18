@@ -2,8 +2,10 @@ package services;
 
 import enteties.Product;
 
+import java.util.ArrayList;
+
 public interface ProductManagementService {
-    Product[] getProducts();
+    ArrayList<Product> getProducts();
 
     Product getProductById(int productIdToAddToCart);
 }

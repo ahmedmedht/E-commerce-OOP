@@ -7,9 +7,11 @@ import menu.Menu;
 import services.OrderManagementService;
 import services.impl.DefaultOrderManagementService;
 
+import java.util.ArrayList;
+
 public class MyOrdersMenu implements Menu {
-    private ApplicationContext context;
-    private OrderManagementService orderManagementService;
+    private final ApplicationContext context;
+    private final OrderManagementService orderManagementService;
 
     {
         context = ApplicationContext.getInstance();
@@ -26,7 +28,7 @@ public class MyOrdersMenu implements Menu {
             menu.start();
         }
         int idUser=context.getLoggedInUser().getId();
-        Order[] orders=orderManagementService.getOrdersByUserId(idUser);
+        ArrayList<Order> orders =orderManagementService.getOrdersByUserId(idUser);
         if (orders==null){
             System.out.println("Unfortunately, you don’t have any orders yet. Navigate back to main menu to place a new order");
         }
@@ -36,7 +38,7 @@ public class MyOrdersMenu implements Menu {
         menu.start();
     }
 
-    private void printUserOrder( Order[] orders) {
+    private void printUserOrder( ArrayList<Order> orders) {
 
             for (Order ord:orders){
                 if (ord==null)

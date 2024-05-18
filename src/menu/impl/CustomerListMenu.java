@@ -6,9 +6,11 @@ import menu.Menu;
 import services.UserManagementService;
 import services.impl.DefaultUserManagementService;
 
+import java.util.ArrayList;
+
 public class CustomerListMenu implements Menu {
-    private ApplicationContext context;
-    private UserManagementService userManagementService;
+    private final ApplicationContext context;
+    private final UserManagementService userManagementService;
 
     {
         userManagementService = DefaultUserManagementService.getInstance();
@@ -25,7 +27,7 @@ public class CustomerListMenu implements Menu {
         menu.start();
     }
 
-    private void printCustomerList(User[] users) {
+    private void printCustomerList(ArrayList<User> users) {
         for (User user:users){
             if (user!=null)
                 System.out.println(user.toString());

@@ -13,8 +13,8 @@ import java.util.Scanner;
 
 public class ProductCatalogMenu implements Menu {
     private static final String CHECKOUT_COMMAND = "checkout";
-    private ApplicationContext context;
-    private ProductManagementService productManagementService;
+    private final ApplicationContext context;
+    private final ProductManagementService productManagementService;
 
 
     {

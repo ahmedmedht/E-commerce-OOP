@@ -3,13 +3,14 @@ package enteties.impl;
 import enteties.Order;
 import enteties.Product;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DefaultOrder implements Order {
     private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
 
     private String creditCardNumber;
-    private Product[] products;
+    private ArrayList<Product> products;
     private int customerId;
     @Override
     public boolean isCreditCardNumberValid(String userInput) {
@@ -33,7 +34,7 @@ public class DefaultOrder implements Order {
     }
 
     @Override
-    public void setProducts(Product[] products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 
@@ -47,7 +48,7 @@ public class DefaultOrder implements Order {
         return creditCardNumber;
     }
 
-    public Product[] getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
@@ -62,7 +63,7 @@ public class DefaultOrder implements Order {
         return "Order: " +
                 " customer id - " + customerId +
                 "  credit card number - " + creditCardNumber +
-                " products - " + Arrays.toString(products) ;
+                " products - " + Arrays.toString(new ArrayList[]{products}) ;
 
     }
 }

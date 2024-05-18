@@ -4,6 +4,7 @@ import enteties.User;
 import enteties.impl.DefaultUser;
 import services.UserManagementService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DefaultUserManagementService implements UserManagementService {
@@ -13,7 +14,7 @@ public class DefaultUserManagementService implements UserManagementService {
     private static final String NO_ERROR_MESSAGE = "";
 
     private static final int DEFAULT_USERS_CAPACITY = 10;
-    private static User[] users;
+    private static ArrayList<User> users;
     private static int lastIndex;
 
     public static int id = 1;
@@ -22,22 +23,35 @@ public class DefaultUserManagementService implements UserManagementService {
 
     // <write your code here>
     {
-        users=new DefaultUser[DEFAULT_USERS_CAPACITY];
+        users=new ArrayList<>();
     }
     private DefaultUserManagementService() {
     }
     @Override
     public User changeSetting(User user,String pass,boolean check){
-        for (int i=0;i<users.length;i++){
-            if (user.getId()==users[i].getId()){
-                if (check)
-                    users[i].setPassword(pass);
-                else
-                    users[i].setEmail(pass);
-                return users[i];
-            }
+//        for (int i=0;i<users.size();i++){
+//            if (user.getId()==users[i].getId()){
+//                if (check)
+//                    users[i].setPassword(pass);
+//                else
+//                    users[i].setEmail(pass);
+//                return users[i];
+//            }
+//        }
+
+        int userIndex=users.indexOf(user);
+
+        if (check) {
+            user.setPassword(pass);
+            }else{
+            user.setEmail(pass);
         }
-        return null;
+        users.set(userIndex, user);
+
+
+
+
+        return user;
     }
 
     @Override
@@ -49,10 +63,7 @@ public class DefaultUserManagementService implements UserManagementService {
     public String registerUser(User user) {
         if (user==null)
             return null;
-        if (users.length <=lastIndex){
-            users= Arrays.copyOf(users,users.length*2);
-        }
-        users[lastIndex++]=user;
+        users.add(user);
         return "New user is created";
     }
 
@@ -66,17 +77,16 @@ public class DefaultUserManagementService implements UserManagementService {
     public static String getNotUniqueEmailErrorMessage(){return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;}
 
     @Override
-    public User[] getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
     @Override
     public User getUserByEmail(String userEmail) {
-        for (User user1 : users){
-            if (user1==null)
-                return null;
-            if (user1.getEmail().equals(userEmail))
-                return user1;
+        for (User user : users) {
+            if (user.getEmail().equals(userEmail)) {
+                return user;
+            }
         }
         return null;
     }

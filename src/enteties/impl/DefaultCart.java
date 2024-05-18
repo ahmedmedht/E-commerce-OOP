@@ -5,38 +5,35 @@ import enteties.Product;
 import services.ProductManagementService;
 import services.impl.DefaultProductManagementService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DefaultCart implements Cart {
-    private  Product[] products;
+    private ArrayList<Product> products;
     private static final int DEFAULT_Product_CAPACITY = 10;
     private static int lastIndex;
 
     {
 
-        products=new Product[DEFAULT_Product_CAPACITY];
+        products=new ArrayList<>();
     }
 
     @Override
     public boolean isEmpty() {
-        return products[0] == null;
+        return products.isEmpty();
     }
 
     @Override
     public void addProduct(Product productById) {
         if (products== null) {
-            products = new Product[DEFAULT_Product_CAPACITY];
-            lastIndex=0;
+            products = new ArrayList<>();
         }
-        if (products.length <=lastIndex){
-            products= Arrays.copyOf(products,products.length*2);
-        }
-        products[lastIndex++]= productById;
+        products.add(productById) ;
 
     }
 
     @Override
-    public Product[] getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
